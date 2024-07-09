@@ -3,21 +3,46 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
 const collectEmployees = function() {
+  const employees = [];
+  let addMore = true;
   // TODO: Get user input to create and return an array of employee objects
+  while (addMore) {
+    const firstName = prompt('Please Enter First Name');
+    const lastName = prompt('Please Enter Last Name');
+    const salary = parseFloat(prompt('Please Enter Salary'));
+
+    if (firstName && lastName && !isNaN(salary)) {
+      employees.push({ firstName, lastName, salary });
+    }
+
+    addMore = confirm('Do you want to add another employee?');
+  }
+
+  return employees;
 }
+
 
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
+  const totalSalary = employeesArray.reduce((acc, emp) => acc + emp.salary, 0);
+  const averageSalary = totalSalary / employeesArray.length;
+  console.log(`Average Salary: ${averageSalary.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  })}`);
 }
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
+  const randomIndex = Math.floor(Math.random() * employeesArray.length);
+  const randomEmployee = employeesArray[randomIndex];
+  console.log(`Random Employee: ${randomEmployee.firstName} ${randomEmployee.lastName}`);
 }
 
 /*
-  ====================
+  =============cdcd=======
   STARTER CODE
   Do not modify any of the code below this line:
 */
